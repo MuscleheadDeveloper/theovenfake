@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import logo from "assets/img/gym1.jpg";
 import Navbar from "components/Navbar.js";
@@ -15,6 +15,24 @@ export default function Landing() {
     });
   });
   const history = useHistory();
+  // MESSAGE FEEDBACK ALGO
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const Feedback = {
+      firstName: firstName,
+      lastName: lastName,
+      message: message,
+      email: email,
+    };
+
+    window.location = "/success";
+  };
+
   return (
     <>
       <main>
@@ -50,10 +68,10 @@ export default function Landing() {
                     our complete brochure to get started today!
                   </p>
                   <a
-                    href="#"
+                    href="#contact"
                     className="bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white p-4 border inline-block border-orange-500 rounded hover:border-transparent cursor-pointer mt-5"
                   >
-                    Download Brochure
+                    Speak to one of our experts
                   </a>
                 </div>
               </div>
@@ -77,7 +95,7 @@ export default function Landing() {
           </div>
         </div>
 
-        <section className="pb-20 bg-black -mt-24" id="pablo">
+        <section className="pb-20 bg-black -mt-24" id="programs">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-between items-center">
               <div
@@ -174,7 +192,7 @@ export default function Landing() {
                     >
                       <polygon
                         points="-30,95 583,95 583,65"
-                        className="text-pink-600 fill-current"
+                        className="text-orange-600 fill-current"
                       ></polygon>
                     </svg>
                     <h4 className="text-xl font-bold text-white">
@@ -192,7 +210,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="relative py-20">
+        <section className="relative py-20" id="about">
           <div
             className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
             style={{ height: "80px" }}
@@ -381,9 +399,9 @@ export default function Landing() {
               </div>
             </div>
           </div>
-        </section>
+        </section> 
 
-        <section className="pb-20 relative block bg-white text-black">
+        <section className="pb-20 relative block bg-white text-black" id="contact">
           <div
             className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
             style={{ height: "80px" }}
@@ -421,70 +439,96 @@ export default function Landing() {
                   data-aos="fade-up-right"
                   className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300"
                 >
-                  <div className="flex-auto p-5 lg:p-10 bg-orange-500 text-white">
-                    <h4 className="text-2xl font-semibold">
-                      Want to work with us?
-                    </h4>
-                    <p className="leading-relaxed mt-1 mb-4">
-                      Complete this form and we will get back to you in 24
-                      hours.
-                    </p>
-                    <div className="relative w-full mb-3 mt-8">
-                      <label
-                        className="block uppercase text-xs font-bold mb-2"
-                        htmlFor="full-name"
-                      >
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        className="border-0 px-3 py-3 text-gray-700 rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Full Name"
-                        style={{ transition: "all .15s ease" }}
-                      />
-                    </div>
+                  <form method="POST" action="/" onSubmit={handleSubmit}>
+                    <div className="flex-auto p-5 lg:p-10 bg-orange-500 text-white">
+                      <h4 className="text-2xl font-semibold">
+                        Want to work with us?
+                      </h4>
+                      <p className="leading-relaxed mt-1 mb-4">
+                        Complete this form and we will get back to you in 24
+                        hours.
+                      </p>
+                      <div className="relative w-full mb-3 mt-8">
+                        <label
+                          className="block uppercase text-xs font-bold mb-2"
+                          htmlFor="first-name"
+                        >
+                          First Name
+                        </label>
+                        <input
+                          type="text"
+                          name="FNAME"
+                          value={firstName}
+                          onChange={(e) => setfirstName(e.target.value)}
+                          className="border-0 px-3 py-3 text-gray-700 rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="First Name"
+                          style={{ transition: "all .15s ease" }}
+                        />
+                      </div>
+                      <div className="relative w-full mb-3 mt-8">
+                        <label
+                          className="block uppercase text-xs font-bold mb-2"
+                          htmlFor="last-name"
+                        >
+                          Last Name
+                        </label>
+                        <input
+                          type="text"
+                          name="LNAME"
+                          value={lastName}
+                          onChange={(e) => setlastName(e.target.value)}
+                          className="border-0 px-3 py-3 text-gray-700 rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Last Name"
+                          style={{ transition: "all .15s ease" }}
+                        />
+                      </div>
 
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-xs font-bold mb-2"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        className="border-0 px-3 py-3 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Email"
-                        style={{ transition: "all .15s ease" }}
-                      />
-                    </div>
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-xs font-bold mb-2"
+                          htmlFor="email"
+                        >
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          name="EMAIL"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="border-0 px-3 py-3 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Email"
+                          style={{ transition: "all .15s ease" }}
+                        />
+                      </div>
 
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-xs font-bold mb-2"
-                        htmlFor="message"
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        rows="4"
-                        cols="80"
-                        className="border-0 px-3 py-3  text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Type a message..."
-                      />
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-xs font-bold mb-2"
+                          htmlFor="message"
+                        >
+                          Message
+                        </label>
+                        <textarea
+                          rows="4"
+                          cols="80"
+                          name="MESSAGE"
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          className="border-0 px-3 py-3  text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Type a message..."
+                        />
+                      </div>
+                      <div className="text-center mt-6">
+                        <button
+                          type="submit"
+                          className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                          style={{ transition: "all .15s ease" }}
+                        >
+                          Send Message
+                        </button>
+                      </div>
                     </div>
-                    <div className="text-center mt-6">
-                      <button
-                        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                        onClick={() => {
-                          history.push("/login");
-                        }}
-                        style={{ transition: "all .15s ease" }}
-                      >
-                        Send Message
-                      </button>
-                    </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

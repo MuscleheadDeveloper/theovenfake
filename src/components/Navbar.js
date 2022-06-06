@@ -52,14 +52,14 @@ export default function Navbar(props) {
                     : "text-gray-800 hover:text-gray-600") +
                   " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                 }
-                href="#pablo"
+                href="#program"
               >
                 <i
                   className={
                     (props.transparent
                       ? "text-orange-500"
                       : "text-orange-500") +
-                    " fab fa-facebook text-lg leading-lg "
+                    " fa fa-house-user text-lg leading-lg "
                   }
                 />
                 <span className="lg:hidden inline-block ml-2">Programs</span>
@@ -74,14 +74,13 @@ export default function Navbar(props) {
                     : "text-gray-800 hover:text-gray-600") +
                   " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                 }
-                href="#pablo"
+                href="#about"
               >
                 <i
                   className={
                     (props.transparent
                       ? " text-orange-500"
-                      : "text-orange-500") +
-                    " fab fa-twitter text-lg leading-lg "
+                      : "text-orange-500") + " fas fa-user text-lg leading-lg "
                   }
                 />
                 <span className="lg:hidden inline-block ml-2">About us</span>
@@ -89,25 +88,25 @@ export default function Navbar(props) {
             </li>
 
             <li className="flex items-center">
-              <Link
+              <a
                 className={
                   (props.transparent
                     ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                     : "text-gray-800 hover:text-gray-600") +
                   " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                 }
-                to="/landing"
+                href="#contact"
               >
                 <i
                   className={
                     (props.transparent
                       ? "text-orange-500"
                       : "text-orange-500") +
-                    " fab fa-instagram text-lg leading-lg "
+                    " fas fa-address-book text-lg leading-lg "
                   }
                 />
                 <span className="lg:hidden inline-block ml-2">Contact Us</span>
-              </Link>
+              </a>
             </li>
             <li className="flex items-center">
               <Link

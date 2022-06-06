@@ -1,29 +1,33 @@
-import React, {useState} from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
+import axios from "axios";
 
 export default function Login() {
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [password, setPassword] = useState('')
-  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
 
-const handleSubmit = (e) => {
-  e.preventDefault()
-  const Registered = {
-    fullName: fullName,
-    password: password,
-    phone: phone,
-    email: email  
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  axios.post('http://localhost:4000/app/login', Registered)
-  .then(response => console.log(response.data))
+    window.location = "/success";
 
-  window.location = "/"
+    const Registered = {
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      email: email,
+    };
 
-}
+    axios
+      .post("http://localhost:4000/app/login", Registered)
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+
   return (
     <>
       <main>
@@ -46,16 +50,17 @@ const handleSubmit = (e) => {
                     <div className="text-gray-500 text-center mb-3 font-bold">
                       <small>Please Input your Credentials</small>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} method="POST" action="/login">
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
+                          htmlFor="grid-lastName"
                         >
                           Email
                         </label>
                         <input
                           type="email"
+                          name="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
@@ -67,16 +72,17 @@ const handleSubmit = (e) => {
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
+                          htmlFor="grid-lastName"
                         >
-                          Password
+                          lastName
                         </label>
                         <input
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                          type="text"
+                          name="LNAME"
+                          value={lastName}
+                          onChange={(e) => setlastName(e.target.value)}
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Password"
+                          placeholder="lastName"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
@@ -85,14 +91,15 @@ const handleSubmit = (e) => {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="full-name"
                         >
-                          Full Name
+                          First Name
                         </label>
                         <input
                           type="text"
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
+                          name="FNAME"
+                          value={firstName}
+                          onChange={(e) => setfirstName(e.target.value)}
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="First & Last Name"
+                          placeholder="First Name"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
@@ -100,12 +107,13 @@ const handleSubmit = (e) => {
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
+                          htmlFor="grid-lastName"
                         >
                           Phone
                         </label>
                         <input
                           type="tel"
+                          name="phone"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
